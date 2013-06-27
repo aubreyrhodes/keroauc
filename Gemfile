@@ -31,6 +31,9 @@ end
 gem 'foreman'
 gem 'unicorn'
 
+gem 'backbone-support'
+gem 'ejs'
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'pry-rails'
