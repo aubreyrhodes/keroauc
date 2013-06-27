@@ -15,6 +15,7 @@
 //= require underscore-min
 //= require backbone-min
 //= require backbone-support
+//= require keroauc
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views
