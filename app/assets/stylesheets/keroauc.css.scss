@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900,400italic,300");
+
+body{
+  font-family: "Lato", sans-serif;
+  background-image: url(asset-path('background-img.jpg'));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.container{
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+  text-rendering: optimizelegibility;
+  &>div>div, &>div>h1, &>div>ol {
+    background-color: rgba(0,0,0,0.5);
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  h1 {
+    font-weight:900;
+    font-size: 80px;
+  }
+  input[type=text] {
+    height: auto;
+    border: none;
+    color: #ffffff;
+    background-color: rgba(0,0,0,0);
+    resize: none;
+    font-size: 40px;
+    width: 100%;
+    &:focus {
+      outline: none;
+    }
+  }
+  ol li {
+    margin-left: 35px;
+    font-size: 20px;
+  }
+}

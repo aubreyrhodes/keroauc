@@ -16,6 +16,8 @@ Keroauc.Views.TasksIndex = Backbone.View.extend({
       self.$('ol').append(taskView.render().el);
     });
 
+    self.$('#new-task-title').focus();
+
     return this;
   },
 

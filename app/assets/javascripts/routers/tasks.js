@@ -12,7 +12,7 @@ Keroauc.Routers.Tasks = Backbone.Router.extend({
       collection: this.collection
     });
 
-    $('body').html(view.render().$el);
+    $('.container').html(view.render().$el);
     this.collection.fetch();
   }
 });
