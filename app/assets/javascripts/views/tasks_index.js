@@ -4,7 +4,14 @@ Keroauc.Views.TasksIndex = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(JST['tasks/index']({ tasks: this.collection }));
+    var self = this;
+    this.$el.html(JST['tasks/index']());
+
+    this.collection.each( function(task){
+      var taskView = new Keroauc.Views.TaskView({ model: task} );
+      self.$('table').append(taskView.render().el);
+    });
+
     return this;
   }
 });
