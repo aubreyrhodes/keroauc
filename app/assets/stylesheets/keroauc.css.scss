@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900,400italic,300");
 
+@media (max-width: 699px) {
+  body{
+    background-color: #34495E;
+    background-image: none !important;
+  }
+}
+
 body{
   font-family: "Lato", sans-serif;
   background-image: url(asset-path('background-img.jpg'));
