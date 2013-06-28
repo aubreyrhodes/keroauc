@@ -3,6 +3,10 @@ Keroauc.Views.TasksIndex = Backbone.View.extend({
     this.collection.on('sync', this.render, this);
   },
 
+  events: {
+    'submit #new-task': 'createTask'
+  },
+
   render: function() {
     var self = this;
     this.$el.html(JST['tasks/index']());
@@ -13,5 +17,10 @@ Keroauc.Views.TasksIndex = Backbone.View.extend({
     });
 
     return this;
+  },
+
+  createTask: function(event){
+    event.preventDefault();
+    this.collection.create({ title: $('#new-task-title').val() });
   }
 });
