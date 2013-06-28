@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   before_filter :load_task, only: [:show, :update, :destroy]
 
   def create
-    task = Task.create(task_params)
+    task = current_user.tasks.create(task_params)
     respond_with task
   end
 
@@ -14,7 +14,7 @@ class TasksController < ApplicationController
   end
 
   def index
-    respond_with Task.all
+    respond_with current_user.tasks
   end
 
   def update
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
   private
 
   def load_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   def task_params

@@ -1,5 +1,5 @@
-def login
-  setup_mock_auth_response('uid' => 'test_uid')
+def login(user)
+  setup_mock_auth_response('uid' => user.uid)
   get root_path
   follow_redirect!
   follow_redirect!

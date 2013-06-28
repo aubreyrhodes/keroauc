@@ -1,8 +1,11 @@
 require 'spec_helper'
 
 describe 'Managing tasks' do
+  let(:user){ User.create(uid: 'test_uid') }
+  let(:other_user){ User.create }
+
   before do
-    login
+    login(user)
   end
 
   let(:json_response){  JSON.parse(response.body) }
@@ -24,7 +27,8 @@ describe 'Managing tasks' do
   end
 
   describe 'listing existing tasks' do
-    let!(:tasks){ 2.times{ Task.create(title: 'test task') } }
+    let!(:tasks){ 2.times{ Task.create(title: 'test task', user: user) } }
+    let!(:other_task){ Task.create(user: other_user) }
 
     before do
       get '/tasks.json'
@@ -37,10 +41,14 @@ describe 'Managing tasks' do
     it 'returns all existing tasks' do
       expect(json_response.length).to eq(2)
     end
+
+    it 'should not return other users tasks' do
+      expect(json_response.map{|j| j['id']}).to_not include(other_task.id)
+    end
   end
 
   describe 'editing an existing task' do
-    let(:task){ Task.create(title: 'old title') }
+    let(:task){ Task.create(title: 'old title', user: user) }
     let(:updated_attributes){ { title: 'new title' } }
 
     before do
@@ -53,7 +61,8 @@ describe 'Managing tasks' do
   end
 
   describe 'veiwing a task' do
-    let!(:task){ Task.create(title: 'task') }
+    let!(:task){ Task.create(title: 'task', user: user) }
+    let!(:other_users_task){ Task.create(user: other_user) }
 
     before do
       get "tasks/#{task.id}.json"
@@ -62,10 +71,15 @@ describe 'Managing tasks' do
     it 'returns successfully' do
       expect(response.status).to eq(200)
     end
+
+    it 'will not return another users task' do
+      get "tasks/#{other_users_task.id}.json"
+      expect(response.status).to eq(404)
+    end
   end
 
   describe 'deleting a task' do
-    let!(:task){ Task.create(title: 'old task') }
+    let!(:task){ Task.create(title: 'old task', user: user) }
 
     before do
       delete "/tasks/#{task.id}.json"
