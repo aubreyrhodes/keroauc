@@ -19,11 +19,27 @@ describe 'Authentication' do
     end
 
     it 'allows a user to authenticate with google and continue to the site' do
-      get root_path
-      follow_redirect!
-      follow_redirect!
-      follow_redirect!
+      login
       expect(response).to be_success
     end
+
+    it 'creates a new user if the user has never logged in before' do
+      expect{login}.to change{User.count}.by(1)
+    end
+
+    it 'saves a new users information' do
+      login
+      expect( User.where(uid: auth_response[:uid]).select(:name, :email).map{|u| [u.name, u.email]}.first).to eq( [ auth_response[:info][:name], auth_response[:info][:email] ])
+    end
+
+    it 'does not create a new user for someone who has logged in before' do
+      User.create(uid: auth_response[:uid])
+      expect{login}.to change{User.count}.by(0)
+    end
   end
+end
+
+def login
+  get root_path
+  3.times{ follow_redirect! }
 end
