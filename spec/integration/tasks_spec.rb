@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe 'Managing tasks' do
+  before do
+    login
+  end
+
   let(:json_response){  JSON.parse(response.body) }
 
   describe 'creating a task' do

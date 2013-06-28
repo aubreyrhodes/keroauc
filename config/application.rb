@@ -14,5 +14,6 @@ Bundler.require(:default, Rails.env)
 module Keroauc
   class Application < Rails::Application
     config.assets.paths << '/app/assets/templates'
+    ActiveSupport::Dependencies.autoload_paths << "#{Rails.root}/lib/constraints"
   end
 end
