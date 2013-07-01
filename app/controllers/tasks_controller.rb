@@ -34,7 +34,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title)
+    params.require(:task).permit(:title, :complete)
   end
 
   def render_404
