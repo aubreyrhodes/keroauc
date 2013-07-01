@@ -28,7 +28,9 @@ describe 'Managing tasks' do
 
   describe 'listing existing tasks' do
     let!(:tasks){ 2.times{ Task.create(title: 'test task', user: user) } }
+    let!(:completed_task){ Task.create(complete: true, user: user) }
     let!(:other_task){ Task.create(user: other_user) }
+    let(:returned_ids){ json_response.map{|j| j['id']} }
 
     before do
       get '/tasks.json'
@@ -43,7 +45,11 @@ describe 'Managing tasks' do
     end
 
     it 'should not return other users tasks' do
-      expect(json_response.map{|j| j['id']}).to_not include(other_task.id)
+      expect(returned_ids).to_not include(other_task.id)
+    end
+
+    it 'should not include complete tasks' do
+      expect(returned_ids).to_not include(completed_task.id)
     end
   end
 

@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20130701174342) do
   create_table "tasks", force: true do |t|
     t.string  "title"
     t.integer "user_id"
-    t.boolean "complete"
+    t.boolean "complete", default: false
   end
 
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree

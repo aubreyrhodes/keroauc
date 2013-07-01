@@ -14,7 +14,7 @@ class TasksController < ApplicationController
   end
 
   def index
-    respond_with current_user.tasks
+    respond_with current_user.tasks.incomplete
   end
 
   def update
