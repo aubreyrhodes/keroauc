@@ -13,7 +13,7 @@ Keroauc.Views.TasksIndex = Backbone.View.extend({
 
     this.collection.each( function(task){
       var taskView = new Keroauc.Views.TaskView({ model: task} );
-      self.$('ol').append(taskView.render().el);
+      self.$('#tasks').append(taskView.render().el);
     });
 
     self.$('#new-task-title').focus();

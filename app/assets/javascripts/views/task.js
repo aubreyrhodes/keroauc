@@ -1,5 +1,5 @@
 Keroauc.Views.TaskView = Backbone.View.extend({
-  tagName: 'li',
+  tagName: 'div',
   initialize: function(){
     this.model.on('change', this.render, this);
   },
