@@ -1,2 +1,6 @@
-<button class="complete-check-box"></button>
+<% if(model.get('complete')) { %>
+  <button class="complete-check-box complete"></button>
+<% } else { %>
+  <button class="complete-check-box"></button>
+<% } %>
 <%= model.escape('title') %>

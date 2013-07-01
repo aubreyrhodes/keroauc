@@ -62,7 +62,7 @@ body{
       border: none;
       cursor: pointer;
     }
-    .complete-check-box:hover:before {
+    .complete-check-box:hover:before, .complete-check-box.complete:before {
       content: "\e00a";
       font-family: 'Flat-UI-Icons';
       font-weight: bold;
