@@ -1,6 +1,5 @@
 class TasksController < ApplicationController
   respond_to :json
-  rescue_from ActiveRecord::RecordNotFound, with: :render_404
 
   before_filter :load_task, only: [:show, :update, :destroy]
 
