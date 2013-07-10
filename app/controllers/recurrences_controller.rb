@@ -1,7 +1,7 @@
 class RecurrencesController < ApplicationController
   respond_to :json
 
-  before_filter :load_recurrence, only: [:show, :update]
+  before_filter :load_recurrence, only: [:show, :update, :destroy]
 
   def create
     recurrence = current_user.recurrences.create(recurrence_params)
@@ -15,6 +15,11 @@ class RecurrencesController < ApplicationController
 
   def show
     respond_with @recurrence
+  end
+
+  def destroy
+    @recurrence.destroy
+    respond_with status: :success
   end
 
   private

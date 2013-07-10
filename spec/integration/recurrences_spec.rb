@@ -56,4 +56,21 @@ describe 'Managing recurences' do
       expect(response.status).to eq(404)
     end
   end
+
+  describe 'deleting a recurrence' do
+    let!(:recurrence){ Recurrence.create(user: user) }
+
+    before do
+      delete "/recurrences/#{recurrence.id}.json"
+    end
+
+    it 'deletes the recurrence successfully' do
+      expect(response.status).to eq(204)
+    end
+
+    it 'removes the recurrence from the server' do
+      get "recurrences/#{recurrence.id}.json"
+      expect(response.status).to eq(404)
+    end
+  end
 end
