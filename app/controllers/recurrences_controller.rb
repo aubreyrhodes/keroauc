@@ -6,6 +6,12 @@ class RecurrencesController < ApplicationController
     respond_with recurrence
   end
 
+  def update
+    recurrence = current_user.recurrences.find(params[:id])
+    recurrence.update_attributes(recurrence_params)
+    respond_with recurrence
+  end
+
   private
 
   def recurrence_params
