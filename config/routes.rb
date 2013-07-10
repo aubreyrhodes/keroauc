@@ -1,6 +1,7 @@
 Keroauc::Application.routes.draw do
   constraints(AuthConstraint.new) do
     resources :tasks
+    resources :recurrences
     root to: 'home#index'
   end
 
