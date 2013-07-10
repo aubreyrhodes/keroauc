@@ -38,4 +38,22 @@ describe 'Managing recurences' do
       expect(response.status).to eq(204)
     end
   end
+
+  describe 'veiwing a recurrence' do
+    let(:recurrence){ Recurrence.create(frequency: 'daily', user: user) }
+    let(:other_users_recurrence){ Recurrence.create(user: other_user) }
+
+    before do
+      get "recurrences/#{recurrence.id}.json"
+    end
+
+    it 'returns successfully' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'will not return another users recurrence' do
+      get "recurrences/#{other_users_recurrence.id}.json"
+      expect(response.status).to eq(404)
+    end
+  end
 end
