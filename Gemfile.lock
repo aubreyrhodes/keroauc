@@ -39,6 +39,9 @@ GEM
     coffee-script-source (1.6.3)
     diff-lcs (1.2.4)
     dotenv (0.8.0)
+    dotenv-rails (0.8.0)
+      dotenv (= 0.8.0)
+    ee_cummings (0.1.0)
     ejs (1.1.1)
     erubis (2.7.0)
     execjs (1.4.0)
@@ -169,6 +172,8 @@ PLATFORMS
 DEPENDENCIES
   backbone-support
   coffee-rails (~> 4.0.0)
+  dotenv-rails
+  ee_cummings
   ejs
   foreman
   jbuilder (~> 1.2)

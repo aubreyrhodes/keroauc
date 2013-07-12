@@ -31,6 +31,7 @@ end
 
 gem 'foreman'
 gem 'unicorn'
+gem 'ee_cummings'
 
 gem 'backbone-support'
 gem 'ejs'
@@ -40,6 +41,7 @@ gem "omniauth-google-oauth2"
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'pry-rails'
+  gem 'dotenv-rails'
 end
 
 gem 'rails_12factor', group: :production
