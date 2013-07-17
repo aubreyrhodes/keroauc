@@ -4,7 +4,7 @@ class RecurrencesController < ApplicationController
   before_filter :load_recurrence, only: [:show, :update, :destroy]
 
   def create
-    recurrence = RecurrenceScheduler.schedule(recurrence_params)
+    recurrence = RecurrenceScheduler.schedule(recurrence_params, current_user)
     respond_with recurrence
   end
 

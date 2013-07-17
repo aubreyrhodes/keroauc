@@ -17,5 +17,7 @@ module Keroauc
     config.assets.paths << '/app/assets/fonts'
     config.assets.precompile += %w( .svg .eot .woff .ttf )
     ActiveSupport::Dependencies.autoload_paths << "#{Rails.root}/lib/constraints"
+
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
   end
 end

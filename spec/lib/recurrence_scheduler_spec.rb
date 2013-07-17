@@ -7,18 +7,20 @@ describe RecurrenceScheduler do
   let(:attributes){ { frequency: 'daily', task_id: task_id } }
   let(:recurrence_class){ double }
   let(:saved_recurrence){ double(id: 2) }
+  let(:user){ double }
 
   before do
     task_repository.stub(:find).with(task_id).and_return(task)
     task.stub(:update_attributes)
-    recurrence_class.stub(:create).with( frequency: 'daily').and_return(saved_recurrence)
+    user.stub(recurrences: recurrence_class)
+    recurrence_class.stub(:create!).with( frequency: 'daily').and_return(saved_recurrence)
   end
 
   describe '#schedule' do
-    subject { RecurrenceScheduler.new(task_repository, recurrence_class).schedule(attributes) }
+    subject { RecurrenceScheduler.new(task_repository).schedule(attributes, user) }
 
     it 'sets the new recurrences attributes' do
-      recurrence_class.should_receive(:create).with( frequency: 'daily').and_return(saved_recurrence)
+      recurrence_class.should_receive(:create!).with( frequency: 'daily').and_return(saved_recurrence)
       subject
     end
 
