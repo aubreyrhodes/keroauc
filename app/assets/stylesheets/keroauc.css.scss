@@ -15,6 +15,10 @@ body{
   background-size: cover;
 }
 
+.btn{
+
+}
+
 .container{
   max-width: 960px;
   margin-right: auto;
@@ -50,6 +54,9 @@ body{
     margin-bottom: 15px;
     font-size: 30px;
     min-height: 42px;
+    .task-header{
+      cursor: pointer;
+    }
     .complete-check-box{
       background-color: #95a5a6;
       float: left;
