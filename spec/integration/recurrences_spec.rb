@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'Managing recurences' do
   let(:user){ User.create(uid: 'test_uid') }
   let(:other_user){ User.create }
+  let!(:task){ Task.create }
 
   before do
     login(user)
@@ -11,7 +12,7 @@ describe 'Managing recurences' do
   let(:json_response){  JSON.parse(response.body) }
 
   describe 'creating a recurrence' do
-    let(:recurrence){ { frequency: 'daily' } }
+    let(:recurrence){ { frequency: 'daily', task_id: task.id } }
 
     before do
       post '/recurrences.json', recurrence: recurrence
@@ -23,6 +24,10 @@ describe 'Managing recurences' do
 
     it 'returns the created recurrence' do
       expect(json_response['frequency']).to eq(recurrence[:frequency])
+    end
+
+    it 'sets the tasks recurrence id' do
+      expect(task.reload.recurrence_id).to_not be_nil
     end
   end
 
