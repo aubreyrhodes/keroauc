@@ -20,8 +20,8 @@ body{
   margin-right: auto;
   margin-left: auto;
   text-rendering: optimizelegibility;
-  &>div>div, &>div>h1, &>div>ol {
-    background-color: rgba(0,0,0,0.5);
+  &>div>.task-controls, &>div>h1, #tasks>div {
+    background-color: rgba(0,0,0,0.7);
     color: #ffffff;
     padding: 15px;
     border-radius: 5px;
@@ -44,13 +44,12 @@ body{
   }
   #tasks {
     margin-top: 25px;
+    width: 100%;
   }
   #tasks>div {
-    margin-left: 35px;
     margin-bottom: 15px;
     font-size: 30px;
-    width: 90%;
-    min-height: 50px;
+    min-height: 42px;
     .complete-check-box{
       background-color: #95a5a6;
       float: left;
@@ -62,12 +61,15 @@ body{
       border: none;
       cursor: pointer;
     }
-    .complete-check-box:hover:before, .complete-check-box.complete:before {
-      content: "\e00a";
-      font-family: 'Flat-UI-Icons';
-      font-weight: bold;
-      font-size: 17px;
-      color: #34495E;
+    .complete-check-box:hover, .complete-check-box.complete {
+      background-color: #2ECC71;
+      &:before {
+        content: "\e00a";
+        font-family: 'Flat-UI-Icons';
+        font-weight: bold;
+        font-size: 17px;
+        color: #34495E;
+      }
     }
   }
 }
