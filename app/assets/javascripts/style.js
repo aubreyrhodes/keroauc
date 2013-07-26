@@ -1,6 +1,6 @@
 window.setStyles = function(){
   var radioSpans = '<span class="radio-unchecked"></span><span class="radio-checked">';
-  $('input[type=radio]').parents('label')
+  $('input[type=radio]').parents('label').not('.radio')
     .addClass('radio')
     .prepend(radioSpans)
     .on('click', function(e){
