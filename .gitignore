@@ -1,4 +1,6 @@
 .rvmrc
+.ruby-version
+.ruby-gemset
 log/**
 tmp/**
 .env
