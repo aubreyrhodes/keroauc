@@ -30,6 +30,38 @@ body{
     padding: 15px;
     border-radius: 5px;
   }
+  .radio {
+    cursor: pointer;
+    transition: color 0.20s linear;
+    font-size: 14pt;
+    padding: 5px;
+    color: #bdc3c7;
+    .radio-unchecked:before {
+      content: "\e02b";
+      font-family: 'Flat-UI-Icons';
+    }
+    .radio-checked:before {
+      content: "\e032";
+      font-family: 'Flat-UI-Icons';
+    }
+    .radio-checked {
+      display: none;
+    }
+    &:hover, &.checked {
+      .radio-unchecked{
+        display: none;
+      }
+      .radio-checked{
+        display: inline;
+      }
+    }
+    &:hover{
+      color: white;
+    }
+    &.checked {
+      color: #16a085;
+    }
+  }
   h1 {
     font-weight:900;
     font-size: 80px;
@@ -79,4 +111,8 @@ body{
       }
     }
   }
+}
+
+.recurrence{
+  margin-top: 9px;
 }

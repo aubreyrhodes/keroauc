@@ -30,11 +30,13 @@ Keroauc.Views.TaskView = Backbone.View.extend({
       var taskView = this;
       this.recurrence.fetch({ success: function(model){
         taskView.$el.append( (new Keroauc.Views.RecurrenceView({ model: model })).render().el);
+        window.setStyles();
         taskView.$el.addClass('open');
       }});
     } else {
       this.recurrence.set({'task_id': this.model.get('id')});
       this.$el.append( (new Keroauc.Views.RecurrenceView({ model: this.recurrence })).render().el );
+      window.setStyles();
       this.$el.addClass('open');
     }
   },
