@@ -1,4 +1,32 @@
-ID: <%= model.escape('id') %>
+<label>
+  <% var checked = model.get('frequency') == 'daily' ? 'checked="checked"' : '' %>
+  <input type="radio" name="recurrence_frequency" value="daily" <%= checked %>/>
+  Daily
+</label>
+
+<label>
+  <% var checked = model.get('frequency') == 'week_daily' ? 'checked="checked"' : '' %>
+  <input type="radio" name="recurrence_frequency" value="week_daily" <%= checked %>/>
+  Every Week Day
+</label>
+
+<label>
+  <% var checked = model.get('frequency') == 'weekly' ? 'checked="checked"' : '' %>
+  <input type="radio" name="recurrence_frequency" value="weekly" <%= checked %>/>
+  Weekly
+</label>
+
+<label>
+  <% var checked = model.get('frequency') == 'monthly' ? 'checked="checked"' : '' %>
+  <input type="radio" name="recurrence_frequency" value="monthly" <%= checked %>/>
+  Monthly
+</label>
+
+<label>
+  <% var checked = model.get('frequency') == 'yearly' ? 'checked="checked"' : '' %>
+  <input type="radio" name="recurrence_frequency" value="yearly" <%= checked %>/>
+  Yearly
+</label>
 
 <div class="controls">
   <a href="#" class="save btn">Save</a>
