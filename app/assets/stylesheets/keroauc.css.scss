@@ -15,8 +15,40 @@ body{
   background-size: cover;
 }
 
-.btn{
+.controls{
+  margin: 15px;
+  margin-top: 20px;
+}
 
+@mixin btn{
+  background-color: #bdc3c7;
+  color: white;
+  font-size: 14pt;
+  text-decoration: none;
+  padding: 9px 12px 10px;
+  border-radius: 6px;
+  transition: 0.2s;
+  &:hover{
+    background-color: #cacfd2;
+  }
+  &:active{
+    background-color: #a1a6a9;
+  }
+}
+
+.btn{
+  @include btn;
+}
+
+.btn-primary{
+  @include btn;
+  background-color: #1abc9c;
+  &:hover{
+    background-color: #48c9b0;
+  }
+  &:active {
+    background-color: #16a085;
+  }
 }
 
 .container{
