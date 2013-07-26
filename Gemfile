@@ -29,6 +29,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'dalli'
+gem 'memcachier'
+
 gem 'foreman'
 gem 'unicorn'
 gem 'ee_cummings'

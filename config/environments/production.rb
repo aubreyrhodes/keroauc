@@ -1,4 +1,7 @@
 Keroauc::Application.configure do
+  # setup cache for assets
+  config.assets.cache_store = :dalli_store
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

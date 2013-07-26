@@ -37,6 +37,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    dalli (2.6.4)
     diff-lcs (1.2.4)
     dotenv (0.8.0)
     dotenv-rails (0.8.0)
@@ -68,6 +69,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcachier (0.0.2)
     method_source (0.8.1)
     mime-types (1.23)
     minitest (4.7.5)
@@ -172,12 +174,14 @@ PLATFORMS
 DEPENDENCIES
   backbone-support
   coffee-rails (~> 4.0.0)
+  dalli
   dotenv-rails
   ee_cummings
   ejs
   foreman
   jbuilder (~> 1.2)
   jquery-rails
+  memcachier
   omniauth-google-oauth2
   pg
   pry-rails
