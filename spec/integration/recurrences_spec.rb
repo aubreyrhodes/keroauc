@@ -78,4 +78,37 @@ describe 'Managing recurences' do
       expect(response.status).to eq(404)
     end
   end
+
+  describe 'veiwing all recurrence rules' do
+    let!(:tasks){ (1..2).map{|i| Task.create(user: user, title: "Test #{i}", recurrence: recurrences[i-1]) } }
+    let!(:recurrences){ (1..2).map{|i| Recurrence.create(user: user, start_date: Date.today, frequency: 'daily') } }
+
+    before do
+      get "recurrences.json"
+    end
+
+    it 'returns successfully' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'returns all recurrences' do
+      expect(json_response.length).to eq(2)
+    end
+
+    it 'returns the start date of the recurrence' do
+      expect(json_response[0]['start_date']).to eq(Date.today.to_s)
+    end
+
+    it 'returns the frequency of a recurrence' do
+      expect(json_response[0]['frequency']).to eq('daily')
+    end
+
+    it 'returns the task title in the data' do
+      expect(json_response[0]['data']['title']).to eq(tasks[0].title)
+    end
+
+    it 'returns the task user id in the data' do
+      expect(json_response[0]['data']['user_id']).to eq(tasks[0].user_id)
+    end
+  end
 end
