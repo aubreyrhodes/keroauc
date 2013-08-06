@@ -36,6 +36,8 @@ gem 'foreman'
 gem 'unicorn'
 gem 'ee_cummings'
 
+gem "active_model_serializers"
+
 gem 'backbone-support'
 gem 'ejs'
 
