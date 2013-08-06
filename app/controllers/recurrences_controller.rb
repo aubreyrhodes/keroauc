@@ -3,6 +3,10 @@ class RecurrencesController < ApplicationController
 
   before_filter :load_recurrence, only: [:show, :update, :destroy]
 
+  def index
+    respond_with Recurrence.all
+  end
+
   def create
     recurrence = RecurrenceScheduler.schedule(recurrence_params, current_user)
     respond_with recurrence
