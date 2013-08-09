@@ -5,7 +5,9 @@ Keroauc::Application.routes.draw do
     root to: 'home#index'
   end
 
-  resources :recurrences, only: [:index]
+  constraints(ApiConstraint.new) do
+    resources :recurrences, only: [:index]
+  end
 
   root to: redirect('/auth/google_oauth2'), as: 'unauthenticated_root'
   post '/auth/:provider/callback' => 'sessions#create'

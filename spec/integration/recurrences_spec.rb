@@ -4,13 +4,12 @@ describe 'Managing recurences' do
   let(:user){ User.create(uid: 'test_uid') }
   let(:other_user){ User.create }
   let!(:task){ Task.create }
+  let(:json_response){  JSON.parse(response.body) }
 
   context 'a user is logged in' do
     before do
       login(user)
     end
-
-    let(:json_response){  JSON.parse(response.body) }
 
     describe 'creating a recurrence' do
       let(:recurrence){ { frequency: 'daily', task_id: task.id } }
@@ -83,12 +82,8 @@ describe 'Managing recurences' do
 
   describe 'veiwing all recurrence rules' do
     context 'an api key is not provided' do
-      before do
-        get "recurrences.json"
-      end
-
       it 'does send recurrence information' do
-        expect(response.status).to eq(403)
+        expect{get '/recurrences.json'}.to raise_error(ActionController::RoutingError)
       end
     end
 

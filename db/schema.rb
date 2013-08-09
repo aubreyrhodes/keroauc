@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130710194348) do
+ActiveRecord::Schema.define(version: 20130809181234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_keys", force: true do |t|
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "api_keys", ["token"], name: "index_api_keys_on_token", unique: true, using: :btree
 
   create_table "recurrences", force: true do |t|
     t.string   "frequency"
