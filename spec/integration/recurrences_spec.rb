@@ -5,110 +5,125 @@ describe 'Managing recurences' do
   let(:other_user){ User.create }
   let!(:task){ Task.create }
 
-  before do
-    login(user)
-  end
-
-  let(:json_response){  JSON.parse(response.body) }
-
-  describe 'creating a recurrence' do
-    let(:recurrence){ { frequency: 'daily', task_id: task.id } }
-
+  context 'a user is logged in' do
     before do
-      post '/recurrences.json', recurrence: recurrence
+      login(user)
     end
 
-    it 'allows a new task to be created' do
-      expect(response.status).to eq 201
+    let(:json_response){  JSON.parse(response.body) }
+
+    describe 'creating a recurrence' do
+      let(:recurrence){ { frequency: 'daily', task_id: task.id } }
+
+      before do
+        post '/recurrences.json', recurrence: recurrence
+      end
+
+      it 'allows a new task to be created' do
+        expect(response.status).to eq 201
+      end
+
+      it 'returns the created recurrence' do
+        expect(json_response['frequency']).to eq(recurrence[:frequency])
+      end
+
+      it 'sets the tasks recurrence id' do
+        expect(task.reload.recurrence_id).to_not be_nil
+      end
     end
 
-    it 'returns the created recurrence' do
-      expect(json_response['frequency']).to eq(recurrence[:frequency])
+    describe 'editing a recurrence' do
+      let(:recurrence){ Recurrence.create(frequency: 'daily', user: user) }
+      let(:updated_attributes){ { frequency: 'weekly' }}
+
+      before do
+        put "/recurrences/#{recurrence.id}.json", recurrence: updated_attributes
+      end
+
+      it 'updates the task successfully' do
+        expect(response.status).to eq(204)
+      end
     end
 
-    it 'sets the tasks recurrence id' do
-      expect(task.reload.recurrence_id).to_not be_nil
-    end
-  end
+    describe 'veiwing a recurrence' do
+      let(:recurrence){ Recurrence.create(frequency: 'daily', user: user) }
+      let(:other_users_recurrence){ Recurrence.create(user: other_user) }
 
-  describe 'editing a recurrence' do
-    let(:recurrence){ Recurrence.create(frequency: 'daily', user: user) }
-    let(:updated_attributes){ { frequency: 'weekly' }}
+      before do
+        get "recurrences/#{recurrence.id}.json"
+      end
 
-    before do
-      put "/recurrences/#{recurrence.id}.json", recurrence: updated_attributes
-    end
+      it 'returns successfully' do
+        expect(response.status).to eq(200)
+      end
 
-    it 'updates the task successfully' do
-      expect(response.status).to eq(204)
-    end
-  end
-
-  describe 'veiwing a recurrence' do
-    let(:recurrence){ Recurrence.create(frequency: 'daily', user: user) }
-    let(:other_users_recurrence){ Recurrence.create(user: other_user) }
-
-    before do
-      get "recurrences/#{recurrence.id}.json"
+      it 'will not return another users recurrence' do
+        get "recurrences/#{other_users_recurrence.id}.json"
+        expect(response.status).to eq(404)
+      end
     end
 
-    it 'returns successfully' do
-      expect(response.status).to eq(200)
-    end
+    describe 'deleting a recurrence' do
+      let!(:recurrence){ Recurrence.create(user: user) }
 
-    it 'will not return another users recurrence' do
-      get "recurrences/#{other_users_recurrence.id}.json"
-      expect(response.status).to eq(404)
-    end
-  end
+      before do
+        delete "/recurrences/#{recurrence.id}.json"
+      end
 
-  describe 'deleting a recurrence' do
-    let!(:recurrence){ Recurrence.create(user: user) }
+      it 'deletes the recurrence successfully' do
+        expect(response.status).to eq(204)
+      end
 
-    before do
-      delete "/recurrences/#{recurrence.id}.json"
-    end
-
-    it 'deletes the recurrence successfully' do
-      expect(response.status).to eq(204)
-    end
-
-    it 'removes the recurrence from the server' do
-      get "recurrences/#{recurrence.id}.json"
-      expect(response.status).to eq(404)
+      it 'removes the recurrence from the server' do
+        get "recurrences/#{recurrence.id}.json"
+        expect(response.status).to eq(404)
+      end
     end
   end
 
   describe 'veiwing all recurrence rules' do
-    let!(:tasks){ (1..2).map{|i| Task.create(user: user, title: "Test #{i}", recurrence: recurrences[i-1]) } }
-    let!(:recurrences){ (1..2).map{|i| Recurrence.create(user: user, start_date: Date.today, frequency: 'daily') } }
+    context 'an api key is not provided' do
+      before do
+        get "recurrences.json"
+      end
 
-    before do
-      get "recurrences.json"
+      it 'does send recurrence information' do
+        expect(response.status).to eq(403)
+      end
     end
 
-    it 'returns successfully' do
-      expect(response.status).to eq(200)
-    end
+    context 'a valid api key is provided' do
+      let!(:api_token){ ApiKey.create(token: 'test123').token }
+      let!(:tasks){ (1..2).map{|i| Task.create(user: user, title: "Test #{i}", recurrence: recurrences[i-1]) } }
+      let!(:recurrences){ (1..2).map{|i| Recurrence.create(user: user, start_date: Date.today, frequency: 'daily') } }
 
-    it 'returns all recurrences' do
-      expect(json_response.length).to eq(2)
-    end
+      before do
+        get "recurrences.json?api_key=#{api_token}"
+      end
 
-    it 'returns the start date of the recurrence' do
-      expect(json_response[0]['start_date']).to eq(Date.today.to_s)
-    end
+      it 'returns successfully' do
+        expect(response.status).to eq(200)
+      end
 
-    it 'returns the frequency of a recurrence' do
-      expect(json_response[0]['frequency']).to eq('daily')
-    end
+      it 'returns all recurrences' do
+        expect(json_response.length).to eq(2)
+      end
 
-    it 'returns the task title in the data' do
-      expect(json_response[0]['data']['title']).to eq(tasks[0].title)
-    end
+      it 'returns the start date of the recurrence' do
+        expect(json_response[0]['start_date']).to eq(Date.today.to_s)
+      end
 
-    it 'returns the task user id in the data' do
-      expect(json_response[0]['data']['user_id']).to eq(tasks[0].user_id)
+      it 'returns the frequency of a recurrence' do
+        expect(json_response[0]['frequency']).to eq('daily')
+      end
+
+      it 'returns the task title in the data' do
+        expect(json_response[0]['data']['title']).to eq(tasks[0].title)
+      end
+
+      it 'returns the task user id in the data' do
+        expect(json_response[0]['data']['user_id']).to eq(tasks[0].user_id)
+      end
     end
   end
 end
