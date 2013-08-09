@@ -1,8 +1,8 @@
-<div class="task-header">
   <% if(model.get('complete')) { %>
     <button class="complete-check-box complete"></button>
   <% } else { %>
     <button class="complete-check-box"></button>
   <% } %>
+<div class="task-header">
   <%= model.escape('title') %>
 </div>
