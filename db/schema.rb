@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130710194348) do
+ActiveRecord::Schema.define(version: 20130812231642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20130710194348) do
     t.integer "user_id"
     t.boolean "complete",      default: false
     t.integer "recurrence_id"
+    t.date    "due_date"
   end
 
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree

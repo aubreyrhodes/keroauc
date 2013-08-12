@@ -33,6 +33,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :complete, :recurrence_id)
+    params.require(:task).permit(:title, :complete, :recurrence_id, :due_date)
   end
 end

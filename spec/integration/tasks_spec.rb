@@ -11,7 +11,7 @@ describe 'Managing tasks' do
   let(:json_response){  JSON.parse(response.body) }
 
   describe 'creating a task' do
-    let(:task){ { title: 'Test Task' } }
+    let(:task){ { title: 'Test Task', due_date: '2013-09-01' } }
 
     before do
       post '/tasks.json', task: task
@@ -23,6 +23,10 @@ describe 'Managing tasks' do
 
     it 'returns the created task' do
       expect(json_response['title']).to eq(task[:title])
+    end
+
+    it 'returns the tasks due date' do
+      expect(json_response['due_date']).to eq(task[:due_date])
     end
   end
 
