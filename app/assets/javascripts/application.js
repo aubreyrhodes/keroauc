@@ -16,6 +16,7 @@
 //= require backbone-min
 //= require backbone-support
 //= require keroauc
+//= require kalendae.standalone.min
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views

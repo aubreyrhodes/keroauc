@@ -8,6 +8,7 @@ Keroauc.Views.RecurrenceView = Backbone.View.extend({
   },
   render: function(){
     this.$el.html(JST['recurrences/recurrence']({model: this.model}));
+    this.calendar = this.$('.due-date-calendar').kalendae();
     return this;
   },
   saveRecurrence: function(event){

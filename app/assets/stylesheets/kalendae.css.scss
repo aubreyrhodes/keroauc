@@ -1,0 +1,65 @@
+.kalendae {
+  width: 250px;
+  display: inline-block;
+  font-size: 20px;
+  .k-title {
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    .k-btn-previous-month:before {
+      content: "\e02d";
+      font-family: 'Flat-UI-Icons';
+      position: absolute;
+      top: 0;
+      left: 5px;
+      cursor: pointer;
+    }
+    .k-btn-next-month:after {
+      content: "\e02c";
+      font-family: 'Flat-UI-Icons';
+      position: absolute;
+      top: 0;
+      right: 5px;
+    }
+    .k-caption{
+      cursor: default;
+    }
+  }
+  .k-header span, .k-days span {
+    float: left;
+    margin: 1px 1px;
+    width: 33px;
+    text-align: right;
+  }
+
+  .k-header, .k-caption{
+    font-family: 'PT Sans Caption', sans-serif;
+  }
+
+  .k-days {
+    cursor: pointer;
+  }
+
+  .k-days .k-out-of-month {
+    color: #ECF0F1;
+  }
+
+  .k-days span{
+    color: #BDC3C7;
+  }
+
+  .k-days span:hover {
+    color: #34495E;
+    transition: color 0.20s linear;
+  }
+
+  .k-days span.k-today {
+    text-decoration: underline;
+  }
+
+  .k-days span.k-selected , .k-days span.k-selected:hover {
+    color: #2ECC71;
+    transition: color 0.20s linear;
+  }
+}
+
