@@ -45,6 +45,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'pry-rails'
   gem 'dotenv-rails'
+  gem 'capistrano'
+  gem 'capistrano-unicorn'
 end
 
 gem 'rails_12factor', group: :production

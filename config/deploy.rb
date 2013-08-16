@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+require 'capistrano-unicorn'
 
 set :application, "tasks"
 set :repository,  "git@github.com:aubreyrhodes/keroauc.git"
@@ -17,3 +18,4 @@ ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 
 default_run_options[:shell] = '/bin/zsh -i'
+after 'deploy:restart', 'unicorn:restart'
