@@ -20,5 +20,5 @@ default_run_options[:pty] = true
 default_run_options[:shell] = '/bin/zsh -i'
 after 'deploy:restart', 'unicorn:restart'
 
-set :unicorn_config_path, "config/unicorn"
+set :unicorn_config_path, "/apps/tasks/current/config/unicorn"
 set :unicorn_config_filename, "production.rb"
