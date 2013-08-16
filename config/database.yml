@@ -14,3 +14,11 @@ test:
   pool: 5
   username:
   password:
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: keroauc_production
+  host: localhost
+  pool: 5
+  username:
+  password:
