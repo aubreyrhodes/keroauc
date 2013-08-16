@@ -22,3 +22,9 @@ production:
   pool: 5
   username:
   password:
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: keroauc_production
+  pool: 5
+  username: acrhodes
