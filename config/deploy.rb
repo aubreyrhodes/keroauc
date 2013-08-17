@@ -1,6 +1,8 @@
 require "bundler/capistrano"
 require 'capistrano-unicorn'
 
+load 'deploy/assets'
+
 set :application, "tasks"
 set :repository,  "git@github.com:aubreyrhodes/keroauc.git"
 

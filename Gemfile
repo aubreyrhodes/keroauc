@@ -45,7 +45,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'pry-rails'
   gem 'dotenv-rails'
-  gem 'capistrano'
+  gem 'capistrano', github: 'capistrano/capistrano', ref: 'fe507fca6d4df4e37d813505f0a85bc546d2c85d'
   gem 'capistrano-unicorn'
 end
 

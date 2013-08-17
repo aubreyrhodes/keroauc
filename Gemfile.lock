@@ -1,3 +1,15 @@
+GIT
+  remote: git://github.com/capistrano/capistrano.git
+  revision: fe507fca6d4df4e37d813505f0a85bc546d2c85d
+  ref: fe507fca6d4df4e37d813505f0a85bc546d2c85d
+  specs:
+    capistrano (2.15.4)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -29,12 +41,6 @@ GEM
     atomic (1.1.12)
     backbone-support (0.4.0)
     builder (3.1.4)
-    capistrano (2.15.5)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
     capistrano-unicorn (0.1.10)
       capistrano
     coderay (1.0.9)
@@ -189,7 +195,7 @@ PLATFORMS
 
 DEPENDENCIES
   backbone-support
-  capistrano
+  capistrano!
   capistrano-unicorn
   coffee-rails (~> 4.0.0)
   dalli
