@@ -129,6 +129,13 @@ h1{
     .task-header{
       cursor: pointer;
     }
+    .task-due {
+      color: #95a5a6;
+      font-size: 15px;
+      &.past-due {
+        color: #E74C3C;
+      }
+    }
     .task-header:hover:after, &.open .task-header:after {
       content: "\e00d";
       font-family: 'Flat-UI-Icons';

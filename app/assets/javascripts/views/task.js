@@ -9,6 +9,13 @@ Keroauc.Views.TaskView = Backbone.View.extend({
   },
   render: function(){
     this.$el.html(JST['tasks/task']({ model: this.model }));
+    if(this.model.get('due_date')){
+      var due_date = moment(this.model.get('due_date'));
+      this.$('.task-due').html(due_date.fromNow());
+      if(moment() >= due_date){
+        this.$('.task-due').addClass('past-due');
+      }
+    }
     return this;
   },
   completeTask: function(event) {
